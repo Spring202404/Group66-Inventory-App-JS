@@ -23,37 +23,34 @@ export default class CategoryView {
     }
 
     addNewCategory() {
-        if (this.ctgTitleInput.value.trim().length >= 2) {
-            // create new object for each category
-            const newCategroy = {
-                id: new Date().getTime(),
-                title: this.ctgTitleInput.value,
-                description: this.ctgDescInput.value,
-            }
-            // reset inputs value
-            this.ctgTitleInput.value = ' '
-            this.ctgDescInput.value = ' '
-            // save category to local storage
+        const categoryTitle = this.ctgTitleInput.value.trim()
+        const categoryDescription = this.ctgDescInput.value.trim()
+
+        if (categoryTitle.length >= 2) {
             const savedCategories = Storage.getCategories();
-            // edit => ... save
-            // new => ... save
-            const existedItem = savedCategories.find((c) => c.title === newCategroy.title);
+            const existedItem = savedCategories.find((c) => c.title.trim().toLowerCase() === categoryTitle.toLowerCase());
+
             if (existedItem) {
-                // edit
-                existedItem.title = newCategroy.title;
-                existedItem.description = newCategroy.description;
+                existedItem.title = categoryTitle;
+                existedItem.description = categoryDescription;
+                Storage.saveCategories(savedCategories)
+                this.instantCtgUpdate(savedCategories)
+                this.resetCategoryForm()
                 alert("this category name has been added before so we will update the category description!")
                 return
-            } else {
-                // new
-                newCategroy.id = new Date().getTime();
-                newCategroy.createdAt = new Date().toISOString();
-                savedCategories.push(newCategroy);
             }
-            console.log(savedCategories);
+
+            const newCategory = {
+                id: new Date().getTime(),
+                title: categoryTitle,
+                description: categoryDescription,
+                createdAt: new Date().toISOString()
+            }
+
+            savedCategories.push(newCategory);
             Storage.saveCategories(savedCategories)
-            // instant update html category list from storage
             this.instantCtgUpdate(savedCategories)
+            this.resetCategoryForm()
         } else {
             alert("your entered title for category must be at least 2 characters!!!")
         }
@@ -61,7 +58,6 @@ export default class CategoryView {
 
     instantCtgUpdate(categories) {
         const ctgListTitles = categories.map(obj => obj.title.trim())
-        console.log(categories);
         // create option for each category
         this.ctgSelect.innerHTML = ` <option selected value="none">- select category -</option>  `
         ctgListTitles.forEach(option => {
@@ -71,6 +67,11 @@ export default class CategoryView {
             // append new created option to select tg
             this.ctgSelect.append(newOption)
         });
+    }
+
+    resetCategoryForm() {
+        this.ctgTitleInput.value = ''
+        this.ctgDescInput.value = ''
     }
 
 }

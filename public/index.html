@@ -75,14 +75,14 @@
                         <h3 class=" w-full text-leftzz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Quantity</h3>
                         <div  id="quantityCenter" class="flex items-center justify-between  zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1 w-full  border-[#394247] border-2 text-stone-100  px-2.5 xx:h-11 dd:h-9 ss:h-9 xx:rounded-xl ss:rounded-lg "
                             type="text">
-                            <button id="decQty" class="  toggleBtn flex items-center justify-center p-1 rounded-full bg-[#273842]  ">
+                            <button id="decQty" type="button" aria-label="Decrease quantity" class="  toggleBtn flex items-center justify-center p-1 rounded-full bg-[#273842]  ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="#fff" class="xx:size-4 ss:size-3 ">
                                     <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                                 </svg>
                             </button>
                             <p  id="productQuantity" class="  ww:text-base xx:text-[14px] dd:text-[13px] ss:text-[12px] font-medium text-stone-100 ">0</p>
-                            <button id="incQty" class="toggleBtn  flex items-center justify-center p-1 rounded-full bg-[#273842]  ">
+                            <button id="incQty" type="button" aria-label="Increase quantity" class="toggleBtn  flex items-center justify-center p-1 rounded-full bg-[#273842]  ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="#fff" class="xx:size-4 ss:size-3">
                                     <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
@@ -121,6 +121,7 @@
                         class="zz:text-base ww:text-[15px] xx:text-[14px] dd:text-[13px] ss:text-[12.5px] zz:py-2.5 ww:py-2 xx:py-2 ss:py-1.5 w-full py-2.5  text-main bg-green-600 border-2 border-green-600 xx:rounded-xl ss:rounded-lg font-semibold ">Add
                         Product</button>
                 </div>
+                <p id="productError" role="alert" class="hidden mt-3 text-red-300 text-sm font-medium"></p>
             </div>
         </div>
     </section>

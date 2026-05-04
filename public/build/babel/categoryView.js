@@ -39,39 +39,32 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
   }, {
     key: "addNewCategory",
     value: function addNewCategory() {
-      if (this.ctgTitleInput.value.trim().length >= 2) {
-        // create new object for each category
-        var newCategroy = {
-          id: new Date().getTime(),
-          title: this.ctgTitleInput.value,
-          description: this.ctgDescInput.value
-        };
-        // reset inputs value
-        this.ctgTitleInput.value = ' ';
-        this.ctgDescInput.value = ' ';
-        // save category to local storage
+      var categoryTitle = this.ctgTitleInput.value.trim();
+      var categoryDescription = this.ctgDescInput.value.trim();
+      if (categoryTitle.length >= 2) {
         var savedCategories = _storage["default"].getCategories();
-        // edit => ... save
-        // new => ... save
         var existedItem = savedCategories.find(function (c) {
-          return c.title === newCategroy.title;
+          return c.title.trim().toLowerCase() === categoryTitle.toLowerCase();
         });
         if (existedItem) {
-          // edit
-          existedItem.title = newCategroy.title;
-          existedItem.description = newCategroy.description;
+          existedItem.title = categoryTitle;
+          existedItem.description = categoryDescription;
+          _storage["default"].saveCategories(savedCategories);
+          this.instantCtgUpdate(savedCategories);
+          this.resetCategoryForm();
           alert("this category name has been added before so we will update the category description!");
           return;
-        } else {
-          // new
-          newCategroy.id = new Date().getTime();
-          newCategroy.createdAt = new Date().toISOString();
-          savedCategories.push(newCategroy);
         }
-        console.log(savedCategories);
+        var newCategory = {
+          id: new Date().getTime(),
+          title: categoryTitle,
+          description: categoryDescription,
+          createdAt: new Date().toISOString()
+        };
+        savedCategories.push(newCategory);
         _storage["default"].saveCategories(savedCategories);
-        // instant update html category list from storage
         this.instantCtgUpdate(savedCategories);
+        this.resetCategoryForm();
       } else {
         alert("your entered title for category must be at least 2 characters!!!");
       }
@@ -83,7 +76,6 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
       var ctgListTitles = categories.map(function (obj) {
         return obj.title.trim();
       });
-      console.log(categories);
       // create option for each category
       this.ctgSelect.innerHTML = " <option selected value=\"none\">- select category -</option>  ";
       ctgListTitles.forEach(function (option) {
@@ -93,6 +85,12 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
         // append new created option to select tg
         _this2.ctgSelect.append(newOption);
       });
+    }
+  }, {
+    key: "resetCategoryForm",
+    value: function resetCategoryForm() {
+      this.ctgTitleInput.value = '';
+      this.ctgDescInput.value = '';
     }
   }]);
 }();
