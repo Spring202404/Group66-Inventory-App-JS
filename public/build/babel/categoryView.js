@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _storage = _interopRequireDefault(require("./storage.js"));
+var _i18n = require("./i18n.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -30,6 +31,9 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
       _this.ctgTitleInput.value = ' ';
       _this.ctgDescInput.value = ' ';
     });
+    document.addEventListener("languagechange", function () {
+      _this.instantCtgUpdate(_storage["default"].getCategories());
+    });
   }
   return _createClass(CategoryView, [{
     key: "setupApp",
@@ -52,7 +56,7 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
           _storage["default"].saveCategories(savedCategories);
           this.instantCtgUpdate(savedCategories);
           this.resetCategoryForm();
-          alert("this category name has been added before so we will update the category description!");
+          alert((0, _i18n.t)("categoryUpdated"));
           return;
         }
         var newCategory = {
@@ -66,7 +70,7 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
         this.instantCtgUpdate(savedCategories);
         this.resetCategoryForm();
       } else {
-        alert("your entered title for category must be at least 2 characters!!!");
+        alert((0, _i18n.t)("categoryTitleTooShort"));
       }
     }
   }, {
@@ -77,7 +81,12 @@ var CategoryView = exports["default"] = /*#__PURE__*/function () {
         return obj.title.trim();
       });
       // create option for each category
-      this.ctgSelect.innerHTML = " <option selected value=\"none\">- select category -</option>  ";
+      this.ctgSelect.replaceChildren();
+      var defaultOption = document.createElement("option");
+      defaultOption.selected = true;
+      defaultOption.value = "none";
+      defaultOption.textContent = (0, _i18n.t)("selectCategory");
+      this.ctgSelect.append(defaultOption);
       ctgListTitles.forEach(function (option) {
         var newOption = document.createElement("option");
         newOption.value = option;

@@ -113,8 +113,9 @@
     "categoryView-babel": "babel src/js/categoryView.js -o public/build/babel/categoryView.js --presets @babel/preset-env  ",
     "productView-babel": "babel src/js/productView.js -o public/build/babel/productView.js --presets @babel/preset-env  ",
     "storage-babel": "babel src/js/storage.js -o public/build/babel/storage.js --presets @babel/preset-env  ",
+    "i18n-babel": "babel src/js/i18n.js -o public/build/babel/i18n.js --presets @babel/preset-env  ",
     "build": "webpack",
-    "test": "npm run categoryView-babel && npm run productView-babel && node --test"
+    "test": "npm run i18n-babel && npm run categoryView-babel && npm run productView-babel && node --test"
   },
   "author": "Abolfazl Rahmati",
   "license": "MIT"

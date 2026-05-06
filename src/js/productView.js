@@ -1,4 +1,5 @@
 import Storage from "./storage.js";
+import { t } from "./i18n.js";
 
 export default class ProductView {
     constructor() {
@@ -29,6 +30,10 @@ export default class ProductView {
         })
         this.sortSelect.addEventListener("change", (e) => {
             this.sortBySelect(e.target.value)
+        })
+        document.addEventListener("languagechange", () => {
+            this.showProductError("")
+            this.sortBySelect(this.sortSelect.value)
         })
     }
 
@@ -125,16 +130,16 @@ export default class ProductView {
 
     validateProductForm() {
         if (this.pdtTitle.value.trim().length < 2) {
-            return "Product title must be at least 2 characters."
+            return t("productTitleTooShort")
         }
         if (this.pdtLocation.value === "none") {
-            return "Please select a valid product location."
+            return t("productLocationRequired")
         }
         if (this.ctgSelect.value === "none") {
-            return "Please select a valid product category."
+            return t("productCategoryRequired")
         }
         if (this.getCurrentQuantity() < 0) {
-            return "Product quantity cannot be negative."
+            return t("productQuantityNegative")
         }
         return ""
     }
@@ -179,7 +184,7 @@ export default class ProductView {
         const deleteButton = document.createElement("button")
         deleteButton.type = "button"
         deleteButton.className = "pdt-dlt-btn flex items-center justify-center text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-main rounded"
-        deleteButton.setAttribute("aria-label", `Delete product ${product.title}`)
+        deleteButton.setAttribute("aria-label", t("deleteProduct", { title: product.title }))
         deleteButton.addEventListener("click", () => this.deleteProduct(Number(product.id)))
         deleteButton.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {
