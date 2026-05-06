@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _storage = _interopRequireDefault(require("./storage.js"));
+var _i18n = require("./i18n.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -43,6 +44,10 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
     });
     this.sortSelect.addEventListener("change", function (e) {
       _this.sortBySelect(e.target.value);
+    });
+    document.addEventListener("languagechange", function () {
+      _this.showProductError("");
+      _this.sortBySelect(_this.sortSelect.value);
     });
   }
   return _createClass(ProductView, [{
@@ -145,16 +150,16 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
     key: "validateProductForm",
     value: function validateProductForm() {
       if (this.pdtTitle.value.trim().length < 2) {
-        return "Product title must be at least 2 characters.";
+        return (0, _i18n.t)("productTitleTooShort");
       }
       if (this.pdtLocation.value === "none") {
-        return "Please select a valid product location.";
+        return (0, _i18n.t)("productLocationRequired");
       }
       if (this.ctgSelect.value === "none") {
-        return "Please select a valid product category.";
+        return (0, _i18n.t)("productCategoryRequired");
       }
       if (this.getCurrentQuantity() < 0) {
-        return "Product quantity cannot be negative.";
+        return (0, _i18n.t)("productQuantityNegative");
       }
       return "";
     }
@@ -208,7 +213,9 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
       var deleteButton = document.createElement("button");
       deleteButton.type = "button";
       deleteButton.className = "pdt-dlt-btn flex items-center justify-center text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-main rounded";
-      deleteButton.setAttribute("aria-label", "Delete product ".concat(product.title));
+      deleteButton.setAttribute("aria-label", (0, _i18n.t)("deleteProduct", {
+        title: product.title
+      }));
       deleteButton.addEventListener("click", function () {
         return _this3.deleteProduct(Number(product.id));
       });

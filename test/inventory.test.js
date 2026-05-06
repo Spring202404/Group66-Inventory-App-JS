@@ -3,6 +3,7 @@ const test = require("node:test");
 
 const ProductView = require("../public/build/babel/productView.js").default;
 const CategoryView = require("../public/build/babel/categoryView.js").default;
+const { setLanguage } = require("../public/build/babel/i18n.js");
 
 class MemoryStorage {
     constructor() {
@@ -44,6 +45,8 @@ function createElement(tagName = "div") {
         type: "",
         id: "",
         value: "",
+        selected: false,
+        dataset: {},
         innerText: "",
         textContent: "",
         className: "",
@@ -92,12 +95,21 @@ function setupProductDom() {
     elements["#categoriesSelect"].value = "none";
     elements["#sort"].value = "newest";
 
+    const documentListeners = {};
     global.document = {
+        documentElement: { lang: "en" },
         querySelector(selector) {
             return elements[selector];
         },
         querySelectorAll(selector) {
             return selector === ".toggleBtn" ? [elements["#incQty"], elements["#decQty"]] : [];
+        },
+        addEventListener(type, handler) {
+            documentListeners[type] = documentListeners[type] || [];
+            documentListeners[type].push(handler);
+        },
+        dispatchEvent(event) {
+            (documentListeners[event.type] || []).forEach((handler) => handler(event));
         },
         createElement,
         createElementNS(_namespace, tagName) {
@@ -105,6 +117,7 @@ function setupProductDom() {
         }
     };
 
+    setLanguage("en");
     return elements;
 }
 
@@ -117,13 +130,26 @@ function setupCategoryDom() {
         "#categoriesSelect": createElement("select")
     };
 
+    const documentListeners = {};
     global.document = {
+        documentElement: { lang: "en" },
         querySelector(selector) {
             return elements[selector];
+        },
+        querySelectorAll() {
+            return [];
+        },
+        addEventListener(type, handler) {
+            documentListeners[type] = documentListeners[type] || [];
+            documentListeners[type].push(handler);
+        },
+        dispatchEvent(event) {
+            (documentListeners[event.type] || []).forEach((handler) => handler(event));
         },
         createElement
     };
 
+    setLanguage("en");
     return elements;
 }
 
@@ -155,6 +181,32 @@ test("product form rejects default location and category values", () => {
     assert.equal(JSON.parse(localStorage.getItem("products") || "[]").length, 0);
     assert.equal(elements["#productError"].textContent, "Please select a valid product location.");
 });
+
+test("product validation and delete label can switch to Chinese", () => {
+    const elements = setupProductDom();
+    setLanguage("zh");
+    const view = new ProductView();
+
+    elements["#productTitle"].value = "Laptop";
+    elements["#productLocations"].value = "none";
+    elements["#categoriesSelect"].value = "none";
+    view.addNewProduct();
+
+    assert.equal(elements["#productError"].textContent, "请选择有效的产品位置。");
+
+    view.showListedProducts([{
+        id: 20,
+        title: "Laptop",
+        location: "BDG",
+        category: "Hardware",
+        persianDate: "2026/5/6",
+        quantity: 1
+    }]);
+
+    const deleteButton = elements["#productsCenter"].children[0].children[5];
+    assert.equal(deleteButton.getAttribute("aria-label"), "删除产品 Laptop");
+});
+
 
 test("product list renders user input as text and creates an accessible delete button", () => {
     const elements = setupProductDom();

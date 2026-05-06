@@ -1,4 +1,5 @@
 import Storage from "./storage.js";
+import { t } from "./i18n.js";
 
 export default class CategoryView {
     constructor() {
@@ -15,6 +16,9 @@ export default class CategoryView {
         this.ctgCacelBtn.addEventListener("click", () => {
             this.ctgTitleInput.value = ' '
             this.ctgDescInput.value = ' '
+        })
+        document.addEventListener("languagechange", () => {
+            this.instantCtgUpdate(Storage.getCategories())
         })
     }
 
@@ -36,7 +40,7 @@ export default class CategoryView {
                 Storage.saveCategories(savedCategories)
                 this.instantCtgUpdate(savedCategories)
                 this.resetCategoryForm()
-                alert("this category name has been added before so we will update the category description!")
+                alert(t("categoryUpdated"))
                 return
             }
 
@@ -52,14 +56,20 @@ export default class CategoryView {
             this.instantCtgUpdate(savedCategories)
             this.resetCategoryForm()
         } else {
-            alert("your entered title for category must be at least 2 characters!!!")
+            alert(t("categoryTitleTooShort"))
         }
     }
 
     instantCtgUpdate(categories) {
         const ctgListTitles = categories.map(obj => obj.title.trim())
         // create option for each category
-        this.ctgSelect.innerHTML = ` <option selected value="none">- select category -</option>  `
+        this.ctgSelect.replaceChildren()
+        const defaultOption = document.createElement("option")
+        defaultOption.selected = true;
+        defaultOption.value = "none";
+        defaultOption.textContent = t("selectCategory");
+        this.ctgSelect.append(defaultOption)
+
         ctgListTitles.forEach(option => {
             const newOption = document.createElement("option")
             newOption.value = option;
