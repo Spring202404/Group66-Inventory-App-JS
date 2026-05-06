@@ -8,6 +8,9 @@ var _storage = _interopRequireDefault(require("./storage.js"));
 var _i18n = require("./i18n.js");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
@@ -30,6 +33,7 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
     this.searchInput = document.querySelector("#searchInput");
     this.sortSelect = document.querySelector("#sort");
     this.productError = document.querySelector("#productError");
+
     // event listeners
     this.pdtAddNew.addEventListener("click", function () {
       _this.addNewProduct();
@@ -65,12 +69,12 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
         return;
       }
       var newProduct = {
-        id: new Date().getTime(),
+        id: Date.now(),
         title: this.pdtTitle.value.trim(),
         quantity: this.getCurrentQuantity(),
         location: this.pdtLocation.value,
         category: this.ctgSelect.value,
-        persianDate: new Date().toLocaleDateString("fa-IR")
+        createdAt: Date.now()
       };
       var pdtList = _storage["default"].getProducts;
       pdtList.push(newProduct);
@@ -87,7 +91,7 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
       productList.forEach(function (product) {
         var listItem = document.createElement("li");
         listItem.className = "flex items-center justify-between w-full py-2 bg-blue-400/ text-white font-medium ss:min-w-[500px] ss:overflow-x-auto";
-        listItem.append(_this2.createProductText(product.title), _this2.createProductText(product.location), _this2.createProductText(product.category), _this2.createProductText(product.persianDate, "basis-[16%] font-vazir ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px]"), _this2.createProductText(product.quantity, "border-2 border-slate-400 p-1 rounded-2xl ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px]"), _this2.createDeleteButton(product));
+        listItem.append(_this2.createProductText(product.title), _this2.createProductText(product.location), _this2.createProductText(product.category), _this2.createProductText(_this2.formatProductDate(product), "basis-[16%] font-vazir ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px]"), _this2.createProductQuantityControls(product), _this2.createDeleteButton(product));
         _this2.productCenter.append(listItem);
       });
     }
@@ -103,6 +107,21 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
           this.setQuantity(Math.max(0, currentQuantity - 1));
           break;
       }
+    }
+  }, {
+    key: "updateProductQuantity",
+    value: function updateProductQuantity(productId, change) {
+      var products = _storage["default"].getProducts;
+      var updatedProducts = products.map(function (product) {
+        if (Number(product.id) === Number(productId)) {
+          return _objectSpread(_objectSpread({}, product), {}, {
+            quantity: Math.max(0, Number(product.quantity) + change)
+          });
+        }
+        return product;
+      });
+      _storage["default"].saveProducts(updatedProducts);
+      this.sortBySelect(this.sortSelect.value);
     }
   }, {
     key: "deleteProduct",
@@ -123,26 +142,26 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
   }, {
     key: "sortBySelect",
     value: function sortBySelect(sortType) {
-      var saveProducts = _storage["default"].getProducts;
+      var savedProducts = _storage["default"].getProducts;
       var sortedProducts = [];
       if (sortType === "newest") {
-        sortedProducts = saveProducts.slice().sort(function (a, b) {
+        sortedProducts = savedProducts.slice().sort(function (a, b) {
           return b.id - a.id;
         });
       } else if (sortType === "oldest") {
-        sortedProducts = saveProducts.slice().sort(function (a, b) {
+        sortedProducts = savedProducts.slice().sort(function (a, b) {
           return a.id - b.id;
         });
       } else if (sortType === "A-Z") {
-        sortedProducts = saveProducts.slice().sort(function (a, b) {
+        sortedProducts = savedProducts.slice().sort(function (a, b) {
           return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
         });
       } else if (sortType === "Z-A") {
-        sortedProducts = saveProducts.slice().sort(function (a, b) {
-          return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
-        }).reverse();
+        sortedProducts = savedProducts.slice().sort(function (a, b) {
+          return b.title.toLowerCase().localeCompare(a.title.toLowerCase());
+        });
       } else {
-        sortedProducts = saveProducts.slice();
+        sortedProducts = savedProducts.slice();
       }
       this.showListedProducts(sortedProducts);
     }
@@ -198,6 +217,17 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
       this.productError.classList.toggle("hidden", !message);
     }
   }, {
+    key: "formatProductDate",
+    value: function formatProductDate(product) {
+      if (product.createdAt) {
+        return new Date(product.createdAt).toISOString().split("T")[0];
+      }
+      if (product.persianDate) {
+        return product.persianDate;
+      }
+      return "";
+    }
+  }, {
     key: "createProductText",
     value: function createProductText(value) {
       var className = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "basis-[16%] ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px]";
@@ -207,9 +237,40 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
       return text;
     }
   }, {
+    key: "createProductQuantityControls",
+    value: function createProductQuantityControls(product) {
+      var _this3 = this;
+      var wrapper = document.createElement("div");
+      wrapper.className = "flex items-center justify-center gap-2 basis-[16%] ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px]";
+      var decreaseButton = document.createElement("button");
+      decreaseButton.type = "button";
+      decreaseButton.textContent = "-";
+      decreaseButton.className = "px-2 py-1 border border-slate-400 rounded focus:outline-none focus:ring-2 focus:ring-blue-300";
+      decreaseButton.disabled = Number(product.quantity) === 0;
+      decreaseButton.classList.toggle("opacity-50", decreaseButton.disabled);
+      decreaseButton.classList.toggle("cursor-not-allowed", decreaseButton.disabled);
+      decreaseButton.setAttribute("aria-label", "Decrease quantity of ".concat(product.title));
+      decreaseButton.addEventListener("click", function () {
+        _this3.updateProductQuantity(product.id, -1);
+      });
+      var quantityText = document.createElement("span");
+      quantityText.textContent = product.quantity;
+      quantityText.className = "border-2 border-slate-400 p-1 rounded-2xl min-w-[32px] text-center";
+      var increaseButton = document.createElement("button");
+      increaseButton.type = "button";
+      increaseButton.textContent = "+";
+      increaseButton.className = "px-2 py-1 border border-slate-400 rounded focus:outline-none focus:ring-2 focus:ring-blue-300";
+      increaseButton.setAttribute("aria-label", "Increase quantity of ".concat(product.title));
+      increaseButton.addEventListener("click", function () {
+        _this3.updateProductQuantity(product.id, 1);
+      });
+      wrapper.append(decreaseButton, quantityText, increaseButton);
+      return wrapper;
+    }
+  }, {
     key: "createDeleteButton",
     value: function createDeleteButton(product) {
-      var _this3 = this;
+      var _this4 = this;
       var deleteButton = document.createElement("button");
       deleteButton.type = "button";
       deleteButton.className = "pdt-dlt-btn flex items-center justify-center text-red-500 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-main rounded";
@@ -217,12 +278,12 @@ var ProductView = exports["default"] = /*#__PURE__*/function () {
         title: product.title
       }));
       deleteButton.addEventListener("click", function () {
-        return _this3.deleteProduct(Number(product.id));
+        return _this4.deleteProduct(Number(product.id));
       });
       deleteButton.addEventListener("keydown", function (event) {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          _this3.deleteProduct(Number(product.id));
+          _this4.deleteProduct(Number(product.id));
         }
       });
       deleteButton.append(this.createDeleteIcon());
