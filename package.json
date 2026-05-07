@@ -114,6 +114,7 @@
     "productView-babel": "babel src/js/productView.js -o public/build/babel/productView.js --presets @babel/preset-env  ",
     "storage-babel": "babel src/js/storage.js -o public/build/babel/storage.js --presets @babel/preset-env  ",
     "i18n-babel": "babel src/js/i18n.js -o public/build/babel/i18n.js --presets @babel/preset-env  ",
+    "cookieBanner-babel": "babel src/js/cookieBanner.js -o public/build/babel/cookieBanner.js --presets @babel/preset-env  ",
     "build": "webpack",
     "test": "npm run i18n-babel && npm run categoryView-babel && npm run productView-babel && node --test"
   },

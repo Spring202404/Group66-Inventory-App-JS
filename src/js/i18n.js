@@ -32,7 +32,12 @@ const translations = {
         productQuantityNegative: "Product quantity cannot be negative.",
         categoryTitleTooShort: "Category title must be at least 2 characters.",
         categoryUpdated: "This category name already exists, so the description was updated.",
-        deleteProduct: "Delete product {title}"
+        deleteProduct: "Delete product {title}",
+        cookieTitle: "Cookie Settings",
+        cookieDescription: "We use cookies to enhance your experience. Learn more about our ",
+        privacyPolicy: "privacy policy",
+        acceptCookies: "Accept",
+        rejectCookies: "Reject"
     },
     zh: {
         appTitle: "库存管理应用",
@@ -65,7 +70,12 @@ const translations = {
         productQuantityNegative: "产品数量不能为负数。",
         categoryTitleTooShort: "分类名称至少需要 2 个字符。",
         categoryUpdated: "该分类名称已存在，因此已更新它的描述。",
-        deleteProduct: "删除产品 {title}"
+        deleteProduct: "删除产品 {title}",
+        cookieTitle: "Cookie 设置",
+        cookieDescription: "我们使用 Cookie 来增强您的体验。详细了解我们的",
+        privacyPolicy: "隐私政策",
+        acceptCookies: "接受",
+        rejectCookies: "拒绝"
     }
 };
 
