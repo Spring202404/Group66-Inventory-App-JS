@@ -29,10 +29,10 @@ export class CookieBanner {
     createBanner() {
         const banner = document.createElement("div");
         banner.id = "cookie-banner";
-        banner.className = "fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 shadow-lg z-50";
+        banner.className = "fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl z-50 w-[min(92%,720px)]";
         
         const content = document.createElement("div");
-        content.className = "max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4 flex-wrap";
+        content.className = "px-4 py-4 flex items-center justify-between gap-4 flex-wrap";
         
         const textContainer = document.createElement("div");
         textContainer.className = "flex-1 min-w-[250px]";
