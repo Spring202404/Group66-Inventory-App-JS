@@ -5,6 +5,7 @@ module.exports = {
         "./public/build/babel/storage.js",
         "./public/build/babel/categoryView.js",
         "./public/build/babel/productView.js",
+        "./public/build/babel/cookieBanner.js",
     ],
     output: {
         path: path.resolve(__dirname, "public/build/webpack"),
