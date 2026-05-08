@@ -3,6 +3,10 @@
 **A sleek and efficient inventory management application powered by JavaScript.**  
 Easily track, update, and manage your inventory with an intuitive UI and dynamic functionality.
 
+
+# Inventory App
+
+[![codecov](https://codecov.io/gh/Spring202404/Group66-Inventory-App-JS/branch/main/graph/badge.svg)](https://codecov.io/gh/Spring202404/Group66-Inventory-App-JS)
 ---
 
 ## ✨ **Features**
