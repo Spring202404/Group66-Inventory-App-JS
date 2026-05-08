@@ -116,7 +116,8 @@
     "i18n-babel": "babel src/js/i18n.js -o public/build/babel/i18n.js --presets @babel/preset-env  ",
     "cookieBanner-babel": "babel src/js/cookieBanner.js -o public/build/babel/cookieBanner.js --presets @babel/preset-env  ",
     "build": "webpack",
-    "test": "npm run i18n-babel && npm run categoryView-babel && npm run productView-babel && node --test"
+    "test": "npm run app-babel && npm run storage-babel && npm run i18n-babel && npm run cookieBanner-babel && npm run categoryView-babel && npm run productView-babel && node --test test/*.test.js",
+    "coverage": "npm run app-babel && npm run storage-babel && npm run i18n-babel && npm run cookieBanner-babel && npm run categoryView-babel && npm run productView-babel && c8 node --test test/*.test.js"
   },
   "author": "Abolfazl Rahmati",
   "license": "MIT"

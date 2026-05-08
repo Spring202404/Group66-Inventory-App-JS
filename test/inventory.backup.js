@@ -1,9 +1,13 @@
+
 const assert = require("node:assert/strict");
 const test = require("node:test");
 
 const ProductView = require("../public/build/babel/productView.js").default;
 const CategoryView = require("../public/build/babel/categoryView.js").default;
 const { setLanguage } = require("../public/build/babel/i18n.js");
+
+
+const Storage = require("../public/build/babel/storage.js").default;
 
 class MemoryStorage {
     constructor() {
@@ -260,3 +264,6 @@ test("duplicate category updates are saved back to localStorage", () => {
     assert.equal(categories[0].title, "food");
     assert.equal(categories[0].description, "new");
 });
+
+
+
