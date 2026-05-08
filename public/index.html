@@ -29,26 +29,31 @@
         <button type="button" data-lang-option="zh" data-i18n="chinese"
             class="text-stone-200 border-2 border-[#394247] rounded px-3 py-1 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-green-600">中文</button>
     </div>
+    <main class="w-full flex flex-col items-center">
     <!-- Add Category Section -->
-    <section class=" bg-white/ h-auto mt-16 flex  justify-center flex-col zz:py-4 ww:py-3 zz:max-w-[600px] xx:max-w-[92%] ss:max-w-[90%] w-full ">
-        <!-- <a class=" font-medium text-stone-400 text-[18px] text-left ml-1 cursor-pointer " >?Add New Product</a> -->
-        <a data-i18n="addNewCategory" class=" font-medium text-stone-200 zz:text-[21px] ww:text-[19px] xx:text-[17px] dd:text-[15px] ss:text-[14px] text-left ml-3  ">Add New Category</a>
+    <section class=" bg-white/ h-auto mt-16 flex  justify-center flex-col zz:py-4 ww:py-3 zz:max-w-[600px] xx:max-w-[92%] ss:max-w-[90%] w-full mx-auto ">
+        <!-- <div class="font-medium text-stone-400 text-[18px] text-left ml-1 cursor-pointer">?Add New Product</div> -->
+        <h2 data-i18n="addNewCategory" class="font-medium text-stone-200 zz:text-[21px] ww:text-[19px] xx:text-[17px] dd:text-[15px] ss:text-[14px] text-center w-full">Add New Category</h2>
         <div class="bg-[#1a262d] h-auto flex items-start justify-start flex-col w-full xx:my-4 ss:my-3 zz:rounded-3xl ww:rounded-2xl xx:rounded-xl ss:rounded-lg ">
             <!-- category section -->
             <div class=" bg-red-400/ xx:py-4 ss:py-3 zz:px-5 ww:px-4 xx:px-3.5 ss:px-3 flex  flex-col w-full ">
                 <!-- category title -->
                 <div class="  flex flex-col  w-full bg-yellow-300/ ">
-                    <h3 data-i18n="title" class=" w-full text-left zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Title</h3>
+                    <label for="categoryTitle" class=" w-full text-center zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium ">
+                        <span data-i18n="title">Title</span>
+                    </label>
                     <input 
                         class=" zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1 xx:text-base dd:text-[14px] ss:text-[12.5px] zz:w-52 xx:w-44 bg-transparent outline-none border-[#394247] border-2 text-stone-100  px-2 py-1.5 xx:rounded-xl ss:rounded-lg focus:border-green-600 "
-                        type="text" name="" id="categoryTitle">
+                        type="text" name="categoryTitle" id="categoryTitle">
                 </div>
                 <!-- category description -->
                 <div class="  flex flex-col  w-full bg-yellow-300/ mt-4 pb-2 ">
-                    <h3 data-i18n="description" class=" w-full text-left zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Description</h3>
+                    <label for="categoryDescription" class=" w-full text-center zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium ">
+                        <span data-i18n="description">Description</span>
+                    </label>
                     <textarea cols="3" id="categoryDescription"
                         class=" zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1  w-full h-16 min-h-14 max-h-16 xx:text-base dd:text-[14px] bg-transparent outline-none border-[#394247] border-2 text-stone-100  px-2 py-2 xx:rounded-xl ss:rounded-lg focus:border-green-600 "
-                        type="text" name="" id="descInput"></textarea>
+                        name="categoryDescription"></textarea>
                 </div>
                 <!-- Confirm or reject -->
                 <div class=" bg-blue-400/ h-auto flex items-center justify-between w-full xx:mt-4 ss:mt-3 ">
@@ -62,9 +67,8 @@
         </div>
     </section>
     <!-- Add Product Section -->
-    <section class=" bg-white/ h-auto mt-10 flex  justify-center flex-col py-4 zz:max-w-[600px] xx:max-w-[92%] ss:max-w-[90%] w-full ">
-        <!-- <a class=" font-medium text-stone-400 text-[18px] text-left ml-1 cursor-pointer " >?Add New Product</a> -->
-        <a data-i18n="addNewProduct" class=" font-medium text-stone-200 zz:text-[21px] ww:text-[19px] xx:text-[17px] dd:text-[15px] ss:text-[14px] ml-3 ">Add New Product</a>
+    <section class=" bg-white/ h-auto mt-10 flex  justify-center flex-col py-4 zz:max-w-[600px] xx:max-w-[92%] ss:max-w-[90%] w-full mx-auto ">
+        <h2 data-i18n="addNewProduct" class="font-medium text-stone-200 zz:text-[21px] ww:text-[19px] xx:text-[17px] dd:text-[15px] ss:text-[14px] text-center w-full">Add New Product</h2>
         <div class="bg-[#1a262d] h-auto flex items-start justify-start flex-col w-full my-4 ss:my-3 zz:rounded-3xl ww:rounded-2xl xx:rounded-xl ss:rounded-lg ">
             <!-- Product section -->
             <div class=" bg-red-400/ xx:py-4 ss:py-3  zz:px-5 ww:px-4 xx:px-3.5 dd:px-3 ss:px-3 flex  flex-col w-full ">
@@ -72,14 +76,18 @@
                 <div class=" flex items-center justify-between w-full ss:flex-col dd:flex-row ">
                     <!-- title -->
                     <div class="  flex flex-col  dd:w-2/5 ss:w-full bg-yellow-300/ dd:mr-2  ">
-                        <h3 data-i18n="title" class=" w-full text-leftzz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Title</h3>
+                        <label for="productTitle" class=" w-full text-center zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium ">
+                            <span data-i18n="title">Title</span>
+                        </label>
                         <input
                             class=" zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1 w-full  bg-transparent outline-none border-[#394247] border-2 text-stone-100  px-2 xx:py-2 dd:py-1 ss:py-1 xx:rounded-xl ss:rounded-lg focus:border-green-600 "
-                            type="text" name="" id="productTitle">
+                            type="text" name="productTitle" id="productTitle">
                     </div>
                     <!-- quantity -->
                     <div class="  flex flex-col  dd:w-3/5 ss:w-full bg-yellow-300/ dd:ml-2 ss:mt-2 dd:mt-0 ">
-                        <h3 data-i18n="quantity" class=" w-full text-leftzz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Quantity</h3>
+                        <label for="productQuantity" class=" w-full text-center zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium ">
+                            <span data-i18n="quantity">Quantity</span>
+                        </label>
                         <div  id="quantityCenter" class="flex items-center justify-between  zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1 w-full  border-[#394247] border-2 text-stone-100  px-2.5 xx:h-11 dd:h-9 ss:h-9 xx:rounded-xl ss:rounded-lg "
                             type="text">
                             <button id="decQty" type="button" aria-label="Decrease quantity" data-i18n-aria="decreaseQuantity" class="  toggleBtn flex items-center justify-center p-1 rounded-full bg-[#273842]  ">
@@ -103,8 +111,10 @@
                 <div class=" dd:mt-4 ss:mt-2 flex items-center justify-between w-full ss:flex-col dd:flex-row ">
                     <!-- location -->
                     <div class="  flex flex-col  dd:w-[52%] ss:w-full bg-yellow-300/ dd:mr-2  ">
-                        <h3 data-i18n="location" class=" w-full text-leftzz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Location</h3>
-                        <select id="productLocations"
+                        <label for="productLocations" class=" w-full text-center zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium ">
+                            <span data-i18n="location">Location</span>
+                        </label>
+                        <select id="productLocations" name="productLocation"
                             class=" form-select pr-8 pl-3 bg-no-repeat appearance-none w-full ww:text-base xx:text-[14px] ss:text-[13px] zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1 border-[#394247] border-2  text-stone-100 text-[15px] outline-none focus:ring-0 font-normal xx:rounded-xl ss:rounded-lg focus:ring-green-600 focus:border-green-600 block xx:p-2.5 ss:p-1.5 bg-[#1A262D] ">
                             <option data-i18n="selectLocation" selected value="none">- select location - </option>
                             <option value="BDG">BDG</option>
@@ -114,8 +124,10 @@
                     </div>
                     <!-- quantity -->
                     <div class="  flex flex-col  dd:w-[50%] ss:w-full bg-yellow-300/ dd:ml-2 ss:mt-2 dd:mt-0 ">
-                        <h3 data-i18n="category" class=" w-full text-leftzz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium "> Category</h3>
-                        <select id="categoriesSelect"
+                        <label for="categoriesSelect" class=" w-full text-center zz:text-[17px] ww:text-[16px] xx:text-[15px] dd:text-[13px] ss:text-[12.5px] text-white mt-1 font-medium ">
+                            <span data-i18n="category">Category</span>
+                        </label>
+                        <select id="categoriesSelect" name="productCategory"
                             class=" form-select pr-8 pl-3 bg-no-repeat appearance-none w-full ww:text-base xx:text-[14px] ss:text-[13px] zz:mt-3 ww:mt-2 xx:mt-1.5 ss:mt-1 border-[#394247] border-2  text-stone-100 text-[15px] outline-none focus:ring-0 font-normal xx:rounded-xl ss:rounded-lg focus:ring-green-600 focus:border-green-600 block xx:p-2.5 ss:p-1.5 bg-[#1A262D] ">
                             <option data-i18n="selectCategory" selected value="none">- select category -</option>
                             <!-- <option  value=""></option> -->
@@ -134,20 +146,26 @@
     </section>
     <!-- products list -->
     <section class=" mt-10 mb-32 flex items-start justify-center flex-col w-full mx-auto zz:max-w-[600px] ww:max-w-[92%] xx:max-w-[94%] ss:w-[90%] ">
-        <h2 data-i18n="productsList" class=" text-left text-white zz:text-2xl ww:text-xl font-medium ml-1 ">Products List</h2>
+        <h2 data-i18n="productsList" class=" text-center text-white zz:text-2xl ww:text-xl font-medium w-full ">Products List</h2>
         <div class=" flex items-center justify-between w-full bg-yellow-400/ mt-5 ">
             <!-- search products -->
-            <input
-                class=" ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px] zz:w-52 ww:w-40 dd:w-32 xx:w-28 ss:w-24 bg-transparent outline-none border-[#394247] border-2 text-stone-100  xx:px-3 xx:py-2 dd:px-2 dd:py-1.5 ss:p-1.5 xx:rounded-xl ss:rounded-lg focus:border-green-600 "
-                type="text" name="" placeholder="Search..." data-i18n-placeholder="searchPlaceholder" id="searchInput">
+            <div class="relative">
+                <label for="searchInput" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Search products</label>
+                <input
+                    class=" ww:text-base xx:text-[15px] dd:text-[14px] ss:text-[13px] zz:w-52 ww:w-40 dd:w-32 xx:w-28 ss:w-24 bg-transparent outline-none border-[#394247] border-2 text-stone-100  xx:px-3 xx:py-2 dd:px-2 dd:py-1.5 ss:p-1.5 xx:rounded-xl ss:rounded-lg focus:border-green-600 "
+                    type="text" name="search" placeholder="Search..." data-i18n-placeholder="searchPlaceholder" id="searchInput">
+            </div>
             <!-- sort products -->
-            <select id="sort"
-                class=" form-select pr-8 pl-3 bg-no-repeat appearance-none zz:w-32 ww:w-28 xx:w-24 dd:w-24 ss:w-20 border-[#394247] border-2  text-stone-100 xx:text-[15px] dd:text-[13px] ss:text-[12px] outline-none focus:ring-0 font-normal xx:rounded-xl ss:rounded-lg focus:ring-green-600 focus:border-green-600 block xx:p-2.5 dd:p-2 ss:p-1.5 bg-[#1A262D] ">
-                <option data-i18n="newest" selected value="newest">Newest</option>
-                <option data-i18n="oldest" value="oldest">Oldest</option>
-                <option data-i18n="sortAZ" value="A-Z">A-Z</option>
-                <option data-i18n="sortZA" value="Z-A">Z-A</option>
-            </select>
+            <div class="relative">
+                <label for="sort" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Sort products</label>
+                <select id="sort" name="sort"
+                    class=" form-select pr-8 pl-3 bg-no-repeat appearance-none zz:w-32 ww:w-28 xx:w-24 dd:w-24 ss:w-20 border-[#394247] border-2  text-stone-100 xx:text-[15px] dd:text-[13px] ss:text-[12px] outline-none focus:ring-0 font-normal xx:rounded-xl ss:rounded-lg focus:ring-green-600 focus:border-green-600 block xx:p-2.5 dd:p-2 ss:p-1.5 bg-[#1A262D] ">
+                    <option data-i18n="newest" selected value="newest">Newest</option>
+                    <option data-i18n="oldest" value="oldest">Oldest</option>
+                    <option data-i18n="sortAZ" value="A-Z">A-Z</option>
+                    <option data-i18n="sortZA" value="Z-A">Z-A</option>
+                </select>
+            </div>
         </div>
         <!-- pr list -->
         <div class=" flex items-center justify-center ww:w-full ss:w-full ww:mr-3 dd:mt-8 ss:mt-6 overflow-x-auto bg-black/ ">
@@ -194,7 +212,7 @@
     <!-- <script src="//unpkg.com/alpinejs" defer></script> -->
     <script src="build/webpack/bundle.js?v=1"></script>
     <!-- <script src="/src/js/app.js" type="module"></script> -->
-    </div>
+    </main>
 </body>
 
 </html>
