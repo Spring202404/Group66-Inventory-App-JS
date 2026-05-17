@@ -1,53 +1,45 @@
-# 📦 **Inventory App JS**
+# Group 66 Inventory App
 
-**A sleek and efficient inventory management application powered by JavaScript.**  
-Easily track, update, and manage your inventory with an intuitive UI and dynamic functionality.
-
-
-# Inventory App
-
+##  Codecov badge
 [![codecov](https://codecov.io/gh/Spring202404/Group66-Inventory-App-JS/branch/main/graph/badge.svg)](https://codecov.io/gh/Spring202404/Group66-Inventory-App-JS)
----
 
-## ✨ **Features**
 
-- 🛠️ **Dynamic Inventory Tracking:** Real-time updates to your inventory with minimal effort.  
-- 😍 **User-Friendly Interface:** Simplified navigation designed for everyone—no coding experience required!  
-- 🛠️ **Customizable Options:** Adapt the app to suit different business or personal needs.  
-- 📱 **Responsive Design:** Seamless experience across desktop and mobile devices.  
-- ⚡ **Fast & Lightweight:** Built with modern JavaScript principles for optimized performance.  
+##  Live Demo
+
+Check out the live demo [here](https://group66-inventory-app.vercel.app/)!
 
 ---
 
-## 🌐 Live Demo
-
-Check out the live demo [here](https://inventory-rhmti01-tailwind.netlify.app/)!
-
----
-
-## 🛠️ **Development**
-
-Want to contribute? Here's how:
-
-1. **Fork the Repository:** Click the "Fork" button at the top of this page.  
-2. **Make Changes:** Work on your feature branch locally.  
-3. **Submit a Pull Request:** Ensure your code is well-documented and follows the project style guide.  
+##  Project Overview
+Group 66 Inventory App is a web-based inventory management application developed using JavaScript and TailwindCSS. The application allows users to manage products and categories while providing features such as data validation, multilingual support, and improved usability.
 
 ---
 
-## 🤝 **Contributors**
+##  Features
+
+- Product and category management
+- Input validation and error handling
+- Multi-language support
+- Accessibility improvements
+- Automated testing with Codecov integration
+
+---
+
+## Contributors
 
 A huge thanks to all contributors for helping make this project awesome! 🙌  
 
 ---
 
-## 📜 **License**
+## License
 
 This project is licensed under the **MIT License**—use it freely, and don't forget to star the repo if you find it helpful! ⭐  
 
 ---
 
-## 🌟 **Stay Connected**
+## Acknowledgements
 
-- **Author:** [rhmti01](https://github.com/rhmti01)  
-- **Got Ideas?** Submit an issue or start a discussion—we love hearing from you!
+This project is adapted and extended from the original project:
+
+- Original Repository: https://github.com/sptin2002/Inventory-App-JS
+- Original Author: sptin2002
